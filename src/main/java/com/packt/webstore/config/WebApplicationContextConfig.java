@@ -1,6 +1,7 @@
 package com.packt.webstore.config;
 
 
+import com.packt.webstore.intercepter.ProcessingTimeLogInterceptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -57,5 +58,10 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
         UrlPathHelper urlPathHelper = new UrlPathHelper();
         urlPathHelper.setRemoveSemicolonContent(false);
         configurer.setUrlPathHelper(urlPathHelper);
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new ProcessingTimeLogInterceptor());
     }
 }
