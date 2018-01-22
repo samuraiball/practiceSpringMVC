@@ -7,6 +7,11 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * インターセプターの追加
+ * レスポンス速度を測る。
+ * @author hirooka
+ */
 public class ProcessingTimeLogInterceptor implements HandlerInterceptor {
 
     private static final Logger LOGGER = Logger.getLogger(ProcessingTimeLogInterceptor.class);

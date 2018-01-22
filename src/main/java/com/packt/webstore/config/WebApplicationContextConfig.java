@@ -60,6 +60,10 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
         configurer.setUrlPathHelper(urlPathHelper);
     }
 
+    /**
+     * インターセプターの設定
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new ProcessingTimeLogInterceptor());
