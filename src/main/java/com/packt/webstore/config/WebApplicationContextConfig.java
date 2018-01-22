@@ -58,4 +58,6 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
         urlPathHelper.setRemoveSemicolonContent(false);
         configurer.setUrlPathHelper(urlPathHelper);
     }
+
+
 }
