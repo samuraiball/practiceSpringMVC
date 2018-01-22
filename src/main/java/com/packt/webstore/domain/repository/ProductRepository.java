@@ -27,6 +27,12 @@ public interface ProductRepository {
 
     List<Product> getProductsByFilter(Map<String, List<String>> filterParams);
 
+    /*
+     * 商品検索
+     */
+    Product getProduct(String productId);
+
+
     void addProduct(Product product);
 
 }
