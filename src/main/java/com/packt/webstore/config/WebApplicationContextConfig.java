@@ -1,17 +1,18 @@
 package com.packt.webstore.config;
 
 
+import com.packt.webstore.intercepter.ProcessingTimeLogInterceptor;
+import com.packt.webstore.intercepter.PromoCodeInterceptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.util.UrlPathHelper;
-
-import java.util.ResourceBundle;
 
 @Configuration
 @EnableWebMvc
@@ -47,6 +48,16 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
         return resource;
     }
 
+    @Bean
+    public HandlerInterceptor promoCodeInterceptor(){
+        PromoCodeInterceptor promoCodeInterceptor = new PromoCodeInterceptor();
+        promoCodeInterceptor.setPromoCode("OFF3R");
+        promoCodeInterceptor.setOfferRedirect("/market/products");
+        promoCodeInterceptor.setErrorRedirect("invalidPromoCode");
+        return promoCodeInterceptor;
+    }
+
+
     /**
      * HandlerMappingの設定
      *
@@ -59,5 +70,14 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
         configurer.setUrlPathHelper(urlPathHelper);
     }
 
-
+    /**
+     * インターセプターの設定
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new ProcessingTimeLogInterceptor());
+        registry.addInterceptor(promoCodeInterceptor())
+                .addPathPatterns("/**/market/products/specialOffer");
+    }
 }

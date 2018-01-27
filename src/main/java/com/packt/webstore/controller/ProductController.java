@@ -83,6 +83,12 @@ public class ProductController {
         return "redirect:/market/products";
     }
 
+    @RequestMapping("/products/invalidPromoCode")
+    public String invalidPromoCode(){
+        return "invalidPromoCode";
+    }
+
+    @InitBinder
     public void initialiseBinder(WebDataBinder binder) {
         binder.setAllowedFields("productId",
                 "name",
@@ -104,6 +110,4 @@ public class ProductController {
         mav.setViewName("productNotFound");
         return mav;
     }
-
-
 }
