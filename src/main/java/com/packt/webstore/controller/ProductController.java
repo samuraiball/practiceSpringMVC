@@ -83,7 +83,6 @@ public class ProductController {
         return "redirect:/market/products";
     }
 
-
     public void initialiseBinder(WebDataBinder binder) {
         binder.setAllowedFields("productId",
                 "name",
