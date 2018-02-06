@@ -18,6 +18,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //ユーザーの登録
+    //ユーザーの権限付与
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("john").password("pa55word").roles("USER");
@@ -34,8 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
 
-        //認証がされていないときに呼び出される。
-        //ここで呼び出すページはコントローラーの中で呼び出されるページと同じ
+        //認証がされていない場合とのページに飛ばすかの設定
+        //ユーザーネームとパスワードのパラメーターもここで設定
         httpSecurity.formLogin().loginPage("/login")
                 .usernameParameter("userId")
                 .passwordParameter("password");
