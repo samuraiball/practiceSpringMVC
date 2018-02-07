@@ -7,17 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+//@Controller
 public class CustomerController {
 
-    @Autowired
-    CustomerServiceImpl customerServiceImpl;
-
-    @RequestMapping("/customers")
-    public String list(Model model){
-
-        model.addAttribute("customers",customerServiceImpl.getAllCustomers());
-        return "customers";
-    }
+//    @Autowired
+//    CustomerServiceImpl customerServiceImpl;
+//
+//    @RequestMapping("/customers")
+//    public String list(Model model){
+//
+//        model.addAttribute("customers",customerServiceImpl.getAllCustomers());
+//        return "customers";
+//    }
 
 }

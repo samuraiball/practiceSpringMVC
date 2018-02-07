@@ -61,10 +61,9 @@ public class InMemoryProductRepository implements ProductRepository {
             product.setUnitPrice(rs.getBigDecimal("UNIT_PRICE"));
             product.setManufacturer(rs.getString("MANUFACTURER"));
             product.setCategory(rs.getString("CATEGORY"));
-            product.setCondition(rs.getString("CONDITION"));
+            product.setCondition(rs.getString("CONDITION_OF"));
             product.setUnitsInStock(rs.getLong("UNITS_IN_STOCK"));
             product.setUnitsInOrder(rs.getLong("UNITS_IN_ORDER"));
-            product.setDiscontinued(rs.getBoolean("DISCONTINUED"));
             return product;
         }
     }
@@ -107,13 +106,12 @@ public class InMemoryProductRepository implements ProductRepository {
                 "UNIT_PRICE, " +
                 "MANUFACTURER, " +
                 "CATEGORY, " +
-                "CONDITION, " +
+                "CONDITION_OF, " +
                 "UNITS_IN_STOCK, " +
-                "UNITS_IN_ORDER, " +
-                "DISCONTINUED)" +
+                "UNITS_IN_ORDER) " +
                 "VALUES(:id, :name, :desc, :price, " +
                 ":manufacturer, :category, :condition, :inStock, " +
-                ":inOrder, :discontinued)";
+                ":inOrder)";
 
         Map<String, Object> params = new HashMap<>();
         params.put("id", product.getProductId());
@@ -125,7 +123,6 @@ public class InMemoryProductRepository implements ProductRepository {
         params.put("condition", product.getCondition());
         params.put("inStock", product.getUnitsInStock());
         params.put("inOrder", product.getUnitsInOrder());
-        params.put("discontinued", product.isDiscontinued());
 
         jdbcTemplate.update(sql, params);
     }

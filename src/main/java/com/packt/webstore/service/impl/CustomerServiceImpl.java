@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+//
+// @Service
 public class CustomerServiceImpl implements CustomerService{
-    @Autowired
-    CustomerRepository customerRepository;
 
-    public List<Customer> getAllCustomers(){
-        return customerRepository.getAllCustomers();
-    }
+//    @Autowired
+//    CustomerRepository customerRepository;
+//
+//    public List<Customer> getAllCustomers(){
+//        return customerRepository.getAllCustomers();
+//    }
 }
