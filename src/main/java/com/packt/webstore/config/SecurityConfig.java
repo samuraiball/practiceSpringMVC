@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("userId")
                 .passwordParameter("password");
 
+
         httpSecurity.formLogin().defaultSuccessUrl("/market/products/add")
                 .failureUrl("/login?error");
 
@@ -59,4 +60,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //
         httpSecurity.csrf().disable();
     }
+
 }
