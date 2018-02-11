@@ -1,14 +1,22 @@
 package com.packt.webstore.domain;
 
+import org.seasar.doma.Column;
+import org.seasar.doma.Entity;
+import org.seasar.doma.Id;
+import org.seasar.doma.jdbc.entity.NamingType;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@Entity(naming = NamingType.SNAKE_UPPER_CASE)
 public class Product implements Serializable {
 
-    private static final long serialVersionUID =
-            3678107792576131001L;
+    private static final long serialVersionUID = 3678107792576131001L;
 
+    @Id
+    @Column(name = "ID")
     private String productId;
+
     private String name;
     private BigDecimal unitPrice;
     private String description;
@@ -17,6 +25,8 @@ public class Product implements Serializable {
     private long unitsInStock;
     private long unitsInOrder;
     private boolean discontinued;
+
+    @Column(name = "CONDITION_OF")
     private String condition;
 
     public Product() {

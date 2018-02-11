@@ -1,8 +1,13 @@
 package com.packt.webstore.domain.repository.impl;
 
+import com.packt.webstore.DAO.ProductDao;
+import com.packt.webstore.DAO.ProductDaoImpl;
+import com.packt.webstore.config.DomaConfig;
 import com.packt.webstore.domain.Product;
 import com.packt.webstore.domain.repository.ProductRepository;
 import com.packt.webstore.exeption.ProductNotFoundException;
+import org.seasar.doma.jdbc.tx.LocalTransaction;
+import org.seasar.doma.jdbc.tx.TransactionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
@@ -21,16 +26,17 @@ public class InMemoryProductRepository implements ProductRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
+
     @Override
     public Product getProduct(String productId) {
-        String sql = "SELECT * FROM PRODUCTS WHERE ID = :id" ;
-        Map<String, Object> param= new HashMap<>();
-        param.put("id",productId);
+        String sql = "SELECT * FROM PRODUCTS WHERE ID = :id";
+        Map<String, Object> param = new HashMap<>();
+        param.put("id", productId);
 
         Product product = new Product();
 
         try {
-            product = jdbcTemplate.queryForObject(sql,param,new ProductMapper());
+            product = jdbcTemplate.queryForObject(sql, param, new ProductMapper());
         } catch (DataAccessException e) {
             throw new ProductNotFoundException(productId);
         }
@@ -38,8 +44,18 @@ public class InMemoryProductRepository implements ProductRepository {
         return product;
     }
 
+    @Override
+    public List<Product> getAllProductsByDao() {
+        ProductDao productDao = new ProductDaoImpl();
+        TransactionManager tm = DomaConfig.singleton().getTransactionManager();
+        return tm.required(() -> {
+            List<Product> products = productDao.getAllProduct();
+            return products;
+        });
+    }
+
     /*
-    * 全商品の検索
+     * 全商品の検索
      */
     @Override
     public List<Product> getAllProducts() {
@@ -69,8 +85,8 @@ public class InMemoryProductRepository implements ProductRepository {
     }
 
     /*
-    *　商品数が400以下の場合、商品数を+1000に更新する。
-    */
+     *　商品数が400以下の場合、商品数を+1000に更新する。
+     */
     @Override
     public void updateStock(String productId, long noOfUnits) {
         String SQL = "UPDATE PRODUCTS SET UNITS_IN_STOCK =:unitsInStock WHERE ID = :id";

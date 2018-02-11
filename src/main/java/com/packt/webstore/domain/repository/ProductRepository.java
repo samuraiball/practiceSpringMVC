@@ -10,6 +10,12 @@ import com.packt.webstore.domain.Product;
 */
 public interface ProductRepository {
 
+
+    /**
+     * domaを使った全商品検索
+     */
+    List <Product> getAllProductsByDao();
+
     /*
     * 全商品の検索
      */

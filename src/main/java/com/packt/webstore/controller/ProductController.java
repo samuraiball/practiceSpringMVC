@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import sun.dc.pr.PRError;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +35,11 @@ public class ProductController {
 
     @RequestMapping("/products")
     public String list(Model model) {
-        model.addAttribute("products", productServiceImp.getAllProducts());
+        List<Product> products = productServiceImp.getAllProducts();
+//        if (products==null|| products.isEmpty()) {
+//            throw new NoProductsFoundUnderCategoryException();
+//        }
+        model.addAttribute("products", products);
         return "products";
     }
 

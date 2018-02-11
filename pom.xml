@@ -57,6 +57,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.seasar.doma</groupId>
+            <artifactId>doma</artifactId>
+            <version>2.18.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.17</version>
@@ -79,6 +85,17 @@
                     <outputDirectory>${war-output-directory}</outputDirectory>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArgument>-Adao.subpackage=impl</compilerArgument>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 </project>
