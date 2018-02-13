@@ -101,7 +101,9 @@ public class ProductController {
                 "manufacturer",
                 "category",
                 "unitsInStock",
-                "condition");
+                "condition",
+                "unitsInOrder",
+                "discontinued");
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
