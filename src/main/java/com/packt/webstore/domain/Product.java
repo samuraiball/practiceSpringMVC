@@ -1,5 +1,6 @@
 package com.packt.webstore.domain;
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -7,9 +8,16 @@ public class Product implements Serializable {
 
     private static final long serialVersionUID =
             3678107792576131001L;
-
+    @Pattern(regexp = "P[1-9]]+", message = "{Pattern.Product.productId.validation}")
     private String productId;
+
+    @NotNull
+    @Size(min = 4, max = 50, message = "{Size.Product.name.validation}")
     private String name;
+
+    @Min(value = 0, message = "{Min.Product.unitPrice.validation}")
+    @Digits(integer = 8,fraction = 2,message = "{Digit.Product.unitPrice.validation}")
+    @NotNull(message = "{NotNull.Product.unitPrice.validation}")
     private BigDecimal unitPrice;
     private String description;
     private String manufacturer;

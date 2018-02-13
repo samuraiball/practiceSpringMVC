@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +51,7 @@ public class ProductController {
     @RequestMapping("/products/{category}")
     public String getProductsByCategory(Model model, @PathVariable("category") String productCategory) {
         List<Product> products = productService.getProductsByCategory(productCategory);
-        if (products==null|| products.isEmpty()) {
+        if (products == null || products.isEmpty()) {
             throw new NoProductsFoundUnderCategoryException();
         }
         model.addAttribute("products", products);
@@ -71,8 +72,11 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/products/add", method = RequestMethod.POST)
-    public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct, BindingResult result) {
+    public String processAddNewProductForm(@ModelAttribute("newProduct") @Valid Product newProduct, BindingResult result) {
 
+        if (result.hasErrors()) {
+            return "addProduct";
+        }
         String[] suppressedFields = result.getSuppressedFields();
         if (suppressedFields.length > 0) {
             throw new RuntimeException("Attempting to bind disallowed fields: " +
@@ -84,7 +88,7 @@ public class ProductController {
     }
 
     @RequestMapping("/products/invalidPromoCode")
-    public String invalidPromoCode(){
+    public String invalidPromoCode() {
         return "invalidPromoCode";
     }
 
@@ -102,11 +106,11 @@ public class ProductController {
 
     @ExceptionHandler(ProductNotFoundException.class)
     public ModelAndView handleError(HttpServletRequest request,
-                                    ProductNotFoundException exception){
+                                    ProductNotFoundException exception) {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("invalidProductId",exception.getProductId());
-        mav.addObject("exception",exception);
-        mav.addObject("url",request.getRequestURL()+"?"+request.getQueryString());
+        mav.addObject("invalidProductId", exception.getProductId());
+        mav.addObject("exception", exception);
+        mav.addObject("url", request.getRequestURL() + "?" + request.getQueryString());
         mav.setViewName("productNotFound");
         return mav;
     }
