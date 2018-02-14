@@ -112,7 +112,6 @@ public class ProductController {
                 "condition",
                 "unitsInOrder",
                 "discontinued");
-        binder.setValidator(unitsInStockValidator);
         binder.setValidator(productValidator);
     }
 

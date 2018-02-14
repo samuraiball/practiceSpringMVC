@@ -19,8 +19,8 @@ public class ProductValidator implements Validator {
         sprignValidator = new HashSet<Validator>();
     }
 
-    public void setSpringValidator(Set<Validator> sprignValidator){
-        this.sprignValidator = sprignValidator;
+    public void setSpringValidator(Set<Validator> springValidator){
+        this.sprignValidator = springValidator;
     }
 
     public boolean supports(Class<?> clazz){
@@ -29,12 +29,13 @@ public class ProductValidator implements Validator {
 
     public void validate(Object terget, Errors errors){
         Set<ConstraintViolation<Object>> constraintViolations =beanValidator.validate(terget);
+        /*すべてのBeanValidationをヴァリデートする*/
         for (ConstraintViolation<Object> constraintViolation : constraintViolations){
             String propertyPath = constraintViolation.getPropertyPath().toString();
             String message = constraintViolation.getMessage();
             errors.rejectValue(propertyPath," ", message);
         }
-
+        /*すべてのSpringValidationをValidateする*/
         for(Validator validator : sprignValidator){
             validator.validate(terget,errors);
         }
