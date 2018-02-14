@@ -5,6 +5,7 @@ import com.packt.webstore.exeption.NoProductsFoundUnderCategoryException;
 import com.packt.webstore.exeption.ProductNotFoundException;
 import com.packt.webstore.service.ProductService;
 import com.packt.webstore.service.impl.ProductServiceImpl;
+import com.packt.webstore.validator.UnitsInStockValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,9 @@ public class ProductController {
 
     @Autowired
     private ProductServiceImpl productServiceImp;
+
+    @Autowired
+    UnitsInStockValidator unitsInStockValidator;
 
     @RequestMapping("/products")
     public String list(Model model) {
@@ -104,6 +108,7 @@ public class ProductController {
                 "condition",
                 "unitsInOrder",
                 "discontinued");
+        binder.setValidator(unitsInStockValidator);
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
