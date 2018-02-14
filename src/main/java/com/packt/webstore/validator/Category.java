@@ -1,5 +1,6 @@
 package com.packt.webstore.validator;
 
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.Documented;
@@ -11,13 +12,14 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Target({METHOD, FIELD,ANNOTATION_TYPE})
+@Target({METHOD, FIELD, ANNOTATION_TYPE})
 @Retention(RUNTIME)
-//実際にバリデートを行うクラスを指定
-@Constraint(validatedBy = ProductIdValidator.class)
+@Constraint(validatedBy = CategoryValidator.class)
 @Documented
-public @interface ProductId {
-    String message () default "{com.packt.webstore.validator.ProductId.message}";
+public @interface Category {
+    String message () default "{com.packt.webstore.Category.message}";
     Class<?>[] groups() default {};
     public abstract Class<? extends Payload> [] payload() default {};
+
+
 }

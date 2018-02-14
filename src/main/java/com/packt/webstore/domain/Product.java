@@ -1,5 +1,6 @@
 package com.packt.webstore.domain;
 
+import com.packt.webstore.validator.Category;
 import com.packt.webstore.validator.ProductId;
 
 import javax.validation.constraints.*;
@@ -24,7 +25,10 @@ public class Product implements Serializable {
     private BigDecimal unitPrice;
     private String description;
     private String manufacturer;
+
+    @Category
     private String category;
+
     private long unitsInStock;
     private long unitsInOrder;
     private boolean discontinued;
