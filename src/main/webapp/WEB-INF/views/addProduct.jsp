@@ -10,6 +10,12 @@
 </head>
 <body>
 <section>
+    <div class="pull-right" style="padding-right:50px">
+        <a href="?language=en" >English</a>|<a href="?language=nl" >Dutch</a>
+        <a href="<c:url value="/logout" />">Logout</a>
+    </div>
+</section>
+<section>
     <div class="jumbotron">
         <div class="container">
             <h1>Products</h1>
@@ -100,6 +106,7 @@
             <div class="col-lg-offset-2 col-lg-10">
                 <input type="submit" id="btnAdd" class="btnbtn-primary" value="Add"/>
             </div>
+
         </div>
     </fieldset>
 </form:form>

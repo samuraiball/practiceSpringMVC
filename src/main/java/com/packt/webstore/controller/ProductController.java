@@ -1,7 +1,6 @@
 package com.packt.webstore.controller;
 
 import com.packt.webstore.domain.Product;
-import com.packt.webstore.domain.repository.ProductRepository;
 import com.packt.webstore.exeption.NoProductsFoundUnderCategoryException;
 import com.packt.webstore.exeption.ProductNotFoundException;
 import com.packt.webstore.service.ProductService;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.RequestWrapper;
 import java.util.List;
 import java.util.Map;
 
