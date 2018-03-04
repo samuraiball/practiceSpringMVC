@@ -41,7 +41,7 @@ public class Cart implements Serializable {
     }
 
     public BigDecimal getGrandTotal() {
-        updataGrandTotal();
+        updateGrandTotal();
         return grandTotal;
     }
 
@@ -53,7 +53,7 @@ public class Cart implements Serializable {
                 .orElse(null);
     }
 
-    public void updataGrandTotal() {
+    public void updateGrandTotal() {
         Function<CartItem, BigDecimal> totalMapper = cartItem -> cartItem.getTotalPrice();
         BigDecimal grandTotal = cartItems.stream().map(totalMapper)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -64,7 +64,7 @@ public class Cart implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id == null) ?0 :
+        result = prime * result + ((id == null) ? 0 :
         id.hashCode());
         return result;
     }

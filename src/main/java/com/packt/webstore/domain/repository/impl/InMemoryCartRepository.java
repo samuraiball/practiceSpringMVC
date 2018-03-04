@@ -18,6 +18,7 @@ import com.packt.webstore.service.ProductService;
 
 @Repository
 public class InMemoryCartRepository implements CartRepository {
+
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -63,7 +64,7 @@ public class InMemoryCartRepository implements CartRepository {
         List<CartItemDto> cartItems = cartDto.getCartItems();
         for (CartItemDto cartItem : cartItems) {
             String SQL = "UPDATE CART_ITEM SET QUANTITY = :quantity, PRODUCT_ID, : productId" +
-                    "WHERE ID = :id AND CART_ID = : cart_id";
+                    "WHERE ID = :id AND CART_ID = : cartId";
 
             Map<String, Object> params = new HashMap<>();
             params.put("id", cartItem.getId());
@@ -109,7 +110,7 @@ public class InMemoryCartRepository implements CartRepository {
 
         if (cart.getItemByProductId(productId) == null) {
             SQL = "INSERT INTO CART_ITEM (ID, PRODUCT_ID, CART_ID, QUANTITY)" +
-                    "VALUES (:id, :productId, :cardId, :quantity)";
+                    "VALUES (:id, :productId, :cartId, :quantity)";
             cartItemParams.put("id", cartId + productId);
             cartItemParams.put("quantity", 1);
         } else {
