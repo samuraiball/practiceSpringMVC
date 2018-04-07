@@ -18,40 +18,42 @@ public class CartRestController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void create(@RequestBody CartDto cardDto){
+    public void create(@RequestBody CartDto cardDto) {
         cartService.create(cardDto);
     }
 
-    @RequestMapping(value = "/{cartId}",method = RequestMethod.GET)
-    public Cart read(@PathVariable(value = "cartId") String cartId){
+    @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
+    public Cart read(@PathVariable(value = "cartId") String cartId) {
         return cartService.read(cartId);
     }
 
     @RequestMapping(value = "/{cartId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.OK)
-    public void update(@PathVariable(value = "cartId") String cartId, @RequestBody CartDto cartDto){
+    public void update(@PathVariable(value = "cartId") String cartId, @RequestBody CartDto cartDto) {
         cartDto.setId(cartId);
-        cartService.update(cartId,cartDto);
+        cartService.update(cartId, cartDto);
     }
-
 
 
     @RequestMapping(value = "/{cartId}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void delete(@PathVariable(value = "cartId")String cartId){
+    public void delete(@PathVariable(value = "cartId") String cartId) {
         cartService.delete(cartId);
     }
 
     @RequestMapping(value = "/add/{productId}")
     @ResponseStatus(value = HttpStatus.OK)
-    public void addItem(@PathVariable String productId, HttpSession session){
-        cartService.addItem(session.getId(),productId);
+    public void addItem(@PathVariable String productId, HttpSession session) {
+        cartService.addItem(session.getId(), productId);
 
     }
 
     @RequestMapping(value = "/remove/{productId}")
     @ResponseStatus(value = HttpStatus.OK)
-    public void removeItem(@PathVariable String productId , HttpSession session){
-        cartService.removeItem(session.getId(),productId);
+    public void removeItem(@PathVariable String productId, HttpSession session) {
+        cartService.removeItem(session.getId(), productId);
     }
 }
+
+
+

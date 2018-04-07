@@ -34,8 +34,8 @@ public class InMemoryCartRepository implements CartRepository {
 
         cartDto.getCartItems().stream().forEach(cartItemDto -> {
             Product productById = productService.getProduct(cartItemDto.getProductId());
-            String INSET_CART_ITEM_SQL = "INSET INTO CART_ITEM(ID, PRODUCT_ID, CART_ID, QUANTITY)" +
-                    "VALUES(:id, , :product_id, :cart_Id, :quantity)";
+            String INSET_CART_ITEM_SQL = "INSERT INTO CART_ITEM(ID, PRODUCT_ID, CART_ID, QUANTITY)" +
+                    "VALUES(:id, :product_id, :cart_id, :quantity)";
             Map<String, Object> cartItemParams = new HashMap<String, Object>();
             cartItemParams.put("id", cartItemDto.getId());
             cartItemParams.put("product_id", cartItemDto.getProductId());

@@ -10,8 +10,7 @@ public class CartDto implements Serializable {
     private String id;
     private List<CartItemDto> cartItems;
 
-    public CartDto() {
-    }
+    public CartDto() {}
 
     public CartDto(String id) {
         this.id = id;
@@ -22,12 +21,15 @@ public class CartDto implements Serializable {
         this.id = id;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public List<CartItemDto> getCartItems() {
         return cartItems;
     }
 
-    public void setCartItems(List<CartItemDto>
-                                     cartItems) {
+    public void setCartItems(List<CartItemDto> cartItems) {
         this.cartItems = cartItems;
     }
 
@@ -39,7 +41,4 @@ public class CartDto implements Serializable {
         return serialVersionUID;
     }
 
-    public String getId() {
-        return id;
-    }
 }

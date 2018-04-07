@@ -2,7 +2,7 @@ package com.packt.webstore.Dto;
 
 import java.io.Serializable;
 
-public class CartItemDto implements Serializable{
+public class CartItemDto implements Serializable {
     private static Long serialVersionUID = -3551573319376880896L;
 
     private String id;
