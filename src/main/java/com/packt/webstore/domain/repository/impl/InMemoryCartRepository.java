@@ -63,8 +63,7 @@ public class InMemoryCartRepository implements CartRepository {
     public void update(String id, CartDto cartDto) {
         List<CartItemDto> cartItems = cartDto.getCartItems();
         for (CartItemDto cartItem : cartItems) {
-            String SQL = "UPDATE CART_ITEM SET QUANTITY = :quantity, PRODUCT_ID, : productId" +
-                    "WHERE ID = :id AND CART_ID = : cartId";
+            String SQL = "UPDATE CART_ITEM SET QUANTITY = :quantity,  PRODUCT_ID = :productId WHERE ID = :id AND CART_ID = :cartId";
 
             Map<String, Object> params = new HashMap<>();
             params.put("id", cartItem.getId());
@@ -77,8 +76,10 @@ public class InMemoryCartRepository implements CartRepository {
 
     @Override
     public void delete(String id) {
-        String SQL_DELETE_CART_ITEM = "DELETE FROM CART_ITEM WHERE CART_ITEM WHERE CART_ID = :id";
-        String SQL_DELETE_CART = "DELETE FROM CART WHERE CART_ID = ID";
+
+        String SQL_DELETE_CART_ITEM = "DELETE FROM CART_ITEM WHERE CART_ID = :id";
+        String SQL_DELETE_CART = "DELETE FROM CART WHERE ID = :id";
+
         Map<String, Object> params = new HashMap<>();
 
         params.put("id", id);
