@@ -5,6 +5,9 @@ import com.packt.webstore.domain.Cart;
 
 public interface CartRepository {
 
+    //for spring web flow
+    void clearCart(String cartId);
+
     //CRUD
     void create(CartDto cartDto);
     Cart read(String id);
