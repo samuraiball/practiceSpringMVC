@@ -13,6 +13,10 @@ public class WebFLowConfig extends AbstractFlowConfiguration {
     @Bean
     public FlowDefinitionRegistry flowRegistry() {
 
+        /**
+         * ここで、addFlowLocationPatternの**と*に当てはまる文字列がFlowのIDになる。
+         * 特定のFlowを呼び出すときは、http://localhost:8080/IDとなる。
+         */
         return getFlowDefinitionRegistryBuilder()
                 .setBasePath("/WEB-INF/flows")
                 .addFlowLocationPattern("/**/*-flow.xml")
@@ -24,6 +28,10 @@ public class WebFLowConfig extends AbstractFlowConfiguration {
         return getFlowExecutorBuilder(flowRegistry()).build();
     }
 
+    /**
+     * dispacherの設定
+     *
+     */
     @Bean
     public FlowHandlerMapping flowHandlerMapping(){
         FlowHandlerMapping flowHandlerMapping = new FlowHandlerMapping();
@@ -32,6 +40,10 @@ public class WebFLowConfig extends AbstractFlowConfiguration {
         return flowHandlerMapping;
     }
 
+    /**
+     * DispatcherサーブレットとWebFlowとの関係を設定
+     *
+     */
     @Bean
     public FlowHandlerAdapter flowHandlerAdapter() {
         FlowHandlerAdapter handlerAdaptor = new FlowHandlerAdapter();

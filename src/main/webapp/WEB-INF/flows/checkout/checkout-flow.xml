@@ -5,16 +5,21 @@
         <!--変数の設定。すべてのステイトで利用可能-->
         <var name="order" class="com.packt.webstore.domain.Order"/>
 
+        <!--validationをかけてその結果をorder.cartへ-->
         <action-state id="addCartToOrder">
             <evaluate expression="cartServiceImpl.validate(requestParameters.cartId)" result="order.cart"/>
+            <!--上のvalidationにひかかった場合-->
             <transition to="invalidCartWarning" on-exception="com.packt.webstore.exception.InvalidCartException"/>
+            <!--上のvalidationに引っかからなかった場合、ここでcollectionCustomerInfoは下のview-stateで設定-->
             <transition to="collectCustomerInfo"/>
         </action-state>
 
         <view-state id="collectCustomerInfo" view="collectCustomerInfo.jsp" model="order">
+           <!--collectionCustomerInfoViewでsubmitが押されたさいにcollectShippingDetailViewを呼び出し-->
             <transition on="customerInfoCollected" to="collectShippingDetail"/>
         </view-state>
         <view-state id="collectShippingDetail" model="order">
+            <!--shippingDetailCollectedはcheckout-どこにも定義されていないがこの場合 Spring View FlowはView名として扱う。-->
             <transition on="shippingDetailCollected" to="orderConfirmation"/>
             <transition on="backToCollectCustomerInfo" to="collectCustomerInfo"/>
         </view-state>
