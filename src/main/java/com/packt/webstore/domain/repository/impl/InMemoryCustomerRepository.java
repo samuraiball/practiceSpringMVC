@@ -36,9 +36,9 @@ public class InMemoryCustomerRepository implements CustomerRepository {
     private static final class CustomerMapper implements RowMapper<Customer> {
         public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
             Customer customer = new Customer();
-            customer.setCustomerId(rs.getString("CUSTOMER_ID"));
+            customer.setCustomerId(rs.getLong("CUSTOMER_ID"));
             customer.setName(rs.getString("NAME"));
-            customer.setAddress(rs.getString("ADDRESS"));
+            //customer.setBillingAddress(rs.getClass("ADDRESS"));
             return customer;
         }
     }

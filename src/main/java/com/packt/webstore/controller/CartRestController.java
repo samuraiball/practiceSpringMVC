@@ -7,14 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping(value = "rest/cart")
 public class CartRestController {
 
-    @Autowired
     private CartService cartService;
+
+
+    @Inject
+    CartRestController(CartService cartService){
+        this.cartService = cartService;
+    }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
