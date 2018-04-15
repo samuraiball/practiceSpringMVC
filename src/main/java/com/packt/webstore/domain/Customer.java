@@ -60,6 +60,7 @@ public class Customer implements Serializable {
         return serialVersionUID;
     }
 
+
     @Override
     public int hashCode() {
         final int prime = 31;
