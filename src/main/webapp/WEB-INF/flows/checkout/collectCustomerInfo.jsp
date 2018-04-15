@@ -89,6 +89,7 @@
                                 class="form:input-large"/>
                 </div>
             </div>
+            <!--flowExecutiomKeyは実行の識別キー-->
             <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
             <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
